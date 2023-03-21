@@ -1,0 +1,11 @@
+name: ServerStuff
+version: '${project.version}'
+main: me.almana.serverstuff.ServerStuff
+api-version: 1.19
+prefix: ServerStuff
+authors: [ AlmanaX21 ]
+description: The base stuff of the server, includes a lot of stuffs
+command:
+  savemineables:
+    description: 'Saves the mineables.json file'
+    permission: server.save_mineables
