@@ -1,46 +1,34 @@
 package me.almana.serverstuff;
 
-import me.almana.serverstuff.commands.SaveMineablesCommand;
-import me.almana.serverstuff.utils.JsonUtils;
+import me.almana.serverstuff.eventlisteners.BlockBreakListener;
+import me.almana.serverstuff.eventlisteners.GearTableClickListener;
+import me.almana.serverstuff.utils.BlockDropClass;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.io.File;
-import java.io.IOException;
 
 public final class ServerStuff extends JavaPlugin {
 
     private static ServerStuff plugin;
-    private static MiniMessage miniMessage = MiniMessage.miniMessage();
+    private static final MiniMessage miniMessage = MiniMessage.miniMessage();
 
     @Override
     public void onEnable() {
 
         plugin = this;
         getConfig().options().copyDefaults();
-        this.getCommand("savemineables").setExecutor(new SaveMineablesCommand());
-
-        try {
-            checkJsonFile(JsonUtils.getFile());
-            JsonUtils.loadMiningStructure();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        BlockDropClass.addingItems();
+        registerEvents();
         logLoad();
     }
 
     @Override
     public void onDisable() {
 
-        try {
-            JsonUtils.saveMiningStructure();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.getLogger().info("Shutting down");
     }
 
 
-    public void logLoad() {
+    private void logLoad() {
 
         this.getLogger().info("|||||||||||||||||||||||||");
         this.getLogger().info("|||||||||||||||||||||||||");
@@ -49,14 +37,10 @@ public final class ServerStuff extends JavaPlugin {
         this.getLogger().info("|||||||||||||||||||||||||");
     }
 
-    public void checkJsonFile(File file) throws IOException {
+    private void registerEvents() {
 
-        if (!file.exists()) {
-
-            file.getParentFile().mkdirs();
-            file.createNewFile();
-            this.getLogger().info("Created " + file.getName());
-        }
+        this.getServer().getPluginManager().registerEvents(new BlockBreakListener(), this);
+        this.getServer().getPluginManager().registerEvents(new GearTableClickListener(), this);
     }
 
     public static ServerStuff getPlugin() {
