@@ -14,7 +14,7 @@ import java.util.HashMap;
 
 public class BlockBreakListener implements Listener {
 
-    private static HashMap<Material, ItemStack> blockDropMap = BlockDropClass.BlockDropsMap;
+    private static HashMap<Material, ItemStack> blockDropMap = BlockDropClass.blockDropsMap;
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e) {
@@ -24,7 +24,6 @@ public class BlockBreakListener implements Listener {
         if (blockDropMap.containsKey(block)) {
 
             e.getBlock().getWorld().dropItem(e.getBlock().getLocation().add(0, 1, 0), blockDropMap.get(block));
-            e.getBlock().setType(Material.BARRIER);
             Bukkit.getScheduler().runTaskTimer(ServerStuff.getPlugin(), () -> {
 
                 e.getBlock().setType(block, false);
@@ -32,7 +31,7 @@ public class BlockBreakListener implements Listener {
         } else {
 
             e.setCancelled(true);
-            e.getPlayer().sendActionBar(ServerStuff.getMiniMessage().deserialize("<red>Block cannot be broken"));
+            e.getPlayer().sendActionBar(ServerStuff.getMiniMessage().deserialize("<red>Block cannot be broken."));
         }
     }
 }

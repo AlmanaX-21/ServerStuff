@@ -12,7 +12,7 @@ import java.util.List;
 
 public class BlockDropClass {
 
-    public static HashMap<Material, ItemStack> BlockDropsMap = new HashMap<>();
+    public static HashMap<Material, ItemStack> blockDropsMap = new HashMap<>();
     private static MiniMessage miniMessage = ServerStuff.getMiniMessage();
 
 
@@ -25,18 +25,18 @@ public class BlockDropClass {
         meta.setCustomModelData(customDataModel);
         stack.setItemMeta(meta);
 
-        BlockDropsMap.put(block, stack);
+        blockDropsMap.put(block, stack);
     }
 
     public static void addingItems() {
 
-        addItem(Material.DIRT, Material.DIRT, miniMessage.deserialize("<brown><!i> Dirt"), 0,
+        addItem(Material.DIRT, Material.DIRT, miniMessage.deserialize("<color:#9e490d><!i>Dirt"), 0,
                 List.of(miniMessage.deserialize("<gray><!i>Common item not used for much")));
-        addItem(Material.COBBLESTONE, Material.GRAY_DYE, miniMessage.deserialize("<gray><!i> Pebble"), 0,
+        addItem(Material.COBBLESTONE, Material.GRAY_DYE, miniMessage.deserialize("<gray><!i>Pebble"), 0,
                 List.of(miniMessage.deserialize("<gray><!i>Common item not used for much")));
-        addItem(Material.OAK_LOG, Material.OAK_LOG, miniMessage.deserialize("<brown><!i> Wood"), 0,
+        addItem(Material.OAK_LOG, Material.OAK_LOG, miniMessage.deserialize("<color:#9e490d><!i>Wood"), 0,
                 List.of(miniMessage.deserialize("<gray><!i>Common item used a lot")));
-        addItem(Material.OAK_LEAVES, Material.OAK_LEAVES, miniMessage.deserialize("<lime><!i> Dirt"), 0,
+        addItem(Material.OAK_LEAVES, Material.OAK_LEAVES, miniMessage.deserialize("<color:#24bf3e><!i>Leaves"), 0,
                 List.of(miniMessage.deserialize("<gray><!i>Common item not used for much")));
 
         ServerStuff.getPlugin().getLogger().info("Loaded Mineable Blocks..");

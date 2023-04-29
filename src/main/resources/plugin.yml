@@ -4,5 +4,17 @@ main: me.almana.serverstuff.ServerStuff
 api-version: 1.19
 prefix: ServerStuff
 authors: [ AlmanaX21 ]
-description: The base stuff of the server, includes a lot of stuffs
+description: The base stuff of the server, includes a lot of stuff
+depend:
+  - LuckPerms
 commands:
+  testgearcraft:
+    description: Command to test the gear crafting
+    permission: core.debug
+  discord:
+    description: Send the discord link to new players
+    aliases:
+      - disc
+      - cord
+  tags:
+    description: Change your tags
